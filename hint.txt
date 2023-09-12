@@ -1,0 +1,2 @@
+blue color code (rgba) = 0, 0.039, 0.98, 1
+      hashcode = #000afa

@@ -1,0 +1,435 @@
+#:kivy 2.2.1
+
+
+#custom widget for reuse purposes
+<CustomBtn@Button>:
+    size_hint: 0.3, 0.1
+    pos_hint: {'x': 0.35, 'y': 0.15}
+    background_color: 0, 0.004, 0.98, 1
+
+<LogoLabel@Label>:
+    id: app_logo__name
+    markup: True
+    text: '[b]RosterAI[/b]'
+    color: 0, 0.004, 0.98, 1
+    font_size: '22sp'
+    pos_hint: {'x': -0.35, 'y': 0.4}
+
+<HeaderLabel@Label>:
+    markup: True
+    color: 0, 0.004, 0.98, 1
+    font_size: '16sp'
+    pos_hint: {'x': 0, 'y': 0.3}
+
+<CustomFloat@FloatLayout>:
+    canvas:
+        Color:
+            rgba: 0.98, 0.98, 0.98, 0.75
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    background_color: 0.98, 0.98, 0.98, 1
+
+<ListLabel@Label>:
+    id: list_name
+    color: 0, 0, 0, 1
+    font_size: '16sp'
+    text_size: self.width*0.5, None
+
+<DateLabel@Label>:
+    id: date_added
+    text: '25 August 2023'
+    size: self.size
+    color: 0, 0, 0, 1
+
+<UseButton@Button>:
+    id: use_list
+    text: 'use list'
+    background_color: 0, 0.039, 0.98, 1
+
+<CircularButton>:
+    canvas:
+        RoundedRectangle:
+            source: './add_icon.png'
+            pos: self.pos
+            size: self.size
+            radius: 900,
+    size_hint: 0.07, 0.07
+    pos_hint: {'x': 0.45, 'y': 0.2}
+    on_press: root.add_list()
+    on_release:
+        print("This is the button made up by the canvas")
+
+<CustomFillingBox@BoxLayout>:
+    canvas:
+        Color:
+            rgba: 0.98, 0.98, 0.98, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    orientation: 'vertical'
+    size_hint: 0.8, 0.4
+    pos_hint: {'x': 0.1, 'y': 0.35}
+
+#App Widgets
+<HomeWidget>:
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    CustomFloat:
+        size: root.width*0.8, root.height*0.8
+        pos: root.x + root.width*0.1, root.y + root.height*0.1
+        LogoLabel:
+        Label:
+            id: ward_title
+            markup: True
+            text: '[b]ward 20[/b]'
+            color: 0, 0, 0, 1
+            font_size: '22sp'
+            pos_hint: {'x': 0, 'y': 0.4}
+        HeaderLabel:
+            text: '[b]List of Members[/b]'
+        CustomFillingBox:
+            GridLayout:
+                cols: 3
+                ListLabel:
+                    text: 'Li20230531'
+                DateLabel:
+                UseButton:
+                ListLabel:
+                    text: 'Li20230531'
+                DateLabel:
+                UseButton:
+                ListLabel:
+                    text: 'Li20230531'
+                DateLabel:
+                UseButton:
+                ListLabel:
+                    text: 'Li20230714'
+                DateLabel:
+                UseButton:
+                ListLabel:
+                    text: 'Li20230820'
+                DateLabel:
+                UseButton:
+        CircularButton:
+        Label:
+            markup: True
+            text: '[b]Add new list[/b]'
+            color: 0, 0, 0, 1
+            pos_hint: {'x': -0.015, 'y': -0.35}
+
+
+<EmptyMembersWidget>:
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    CustomFloat:
+        size: root.width*0.8, root.height*0.8
+        pos: root.x + root.width*0.1, root.y + root.height*0.1
+        LogoLabel:
+        Label:
+            id: ward_title
+            markup: True
+            text: '[b]ward 20[/b]'
+            color: 0, 0, 0, 1
+            font_size: '22sp'
+            pos_hint: {'x': 0, 'y': 0.4}
+        HeaderLabel:
+            text: 'List of Members'
+        CustomFillingBox:
+            Label:
+                text: 'you have No previous list, click add list button to start creating staff list'
+                color: 0, 0, 0, 1
+        CircularButton:
+        Label:
+            markup: True
+            text: '[b]Add new list[/b]'
+            color: 0, 0, 0, 1
+            pos_hint: {'x': -0.015, 'y': -0.35}
+
+
+
+<AddWidget>:
+    name_list: name_list
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    CustomFloat:
+        size: root.width*0.8, root.height*0.8
+        pos: root.x + root.width*0.1, root.y + root.height*0.1
+        LogoLabel:
+        Label:
+            id: ward_title
+            markup: True
+            text: '[b]ward 20[/b]'
+            color: 0, 0, 0, 1
+            font_size: '22sp'
+            pos_hint: {'x': 0, 'y': 0.4}
+        HeaderLabel:
+            text: 'List of Members'
+        CustomFillingBox:
+            orientation: 'vertical'
+            id: name_list
+        BoxLayout:
+            canvas:
+                Color:
+                    rgba: 0, 0, 0, 0.2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            orientation: 'horizontal'
+            size_hint: 0.8, 0.1
+            pos_hint: {'x': 0.1, 'y': 0.2}
+            padding: 2
+            spacing: 5
+            TextInput:
+                hint_text: 'Enter Name here'
+                size_hint: 0.6,1
+            Button:
+                text: 'Add'
+                size_hint: 0.2, 1
+                background_color: 1, 1, 1, 1
+                on_press: root.adding_list()
+        Button:
+            text: 'submit'
+            size_hint: 0.8, 0.1
+            background_color: 1, 1, 1, 1
+            pos_hint: {'x': 0.1, 'y': 0.07}
+            background_color: 0, 0.039, 0.98, 1
+
+
+
+<IndexWidget>:
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    CustomFloat:
+        size: root.width*0.8, root.height*0.8
+        pos: root.x + root.width*0.1, root.y + root.height*0.1
+        Label:
+            id: app_name
+            markup: True
+            text: '[b]RosterAI[/b]'
+            color: 0, 0.004, 0.98, 1
+            font_size: '23sp'
+            pos_hint: {'x': 0, 'y': 0.2}
+        Label:
+            id: welcome_text
+            markup: True
+            text: 'Welcome to rosterAI application, where time is saved\n And [s]Biases[/s] reduced. \n In just few simple click, roster is created automatic for you. \n Created by AfyaBase[sup]TM[/sup]'
+            halign: 'center'
+            color: 0, 0, 0, 1
+            pos_hint: {'x': 0, 'y': 0}
+        CustomBtn:
+            id: get_started
+            text: 'Get started'
+            on_press: print('button pressed is: ' + get_started.text + ' button')
+
+
+<RegisterWidget>:
+    ward_name: ward_name
+    username: username
+    password: password
+    password2: password2
+
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    
+    FloatLayout:
+        canvas:
+            Color:
+                rgba: 0.98, 0.98, 0.98, 0.75
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: root.width*0.8, root.height*0.8
+        pos: root.x + root.width*0.1, root.y + root.width*0.1
+        Label:
+            id: app_name
+            markup: True
+            text: '[b]RosterAI[/b]'
+            color: 0, 0.004, 0.98, 1
+            font_size: '22sp'
+            pos_hint: {'x': -0.35, 'y': 0.4}
+        Label:
+            id: register_title
+            markup: True
+            text: '[b]Register To continue[/b]'
+            color: 0, 0.004, 0.98, 1
+            font_size: '21sp'
+            pos_hint: { 'x': 0.03, 'y': 0.25}
+        TextInput:
+            id: ward_name
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.35, 'y': 0.6}
+            text: 'ward name'
+            font_size: '13sp'
+            halign: 'center'
+            foreground_color: 0, 0, 0, 0.6
+            allow_copy: True
+        TextInput:
+            id: username
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.35, 'y': 0.5}
+            text: 'username'
+            font_size: '13sp'
+            halign: 'center'
+            foreground_color: 0, 0, 0, 0.6
+            allow_copy: True
+        TextInput:
+            id: password
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.35, 'y': 0.4}
+            text: 'password'
+            font_size: '13sp'
+            halign: 'center'
+            foreground_color: 0, 0, 0, 0.6
+            allow_copy: True
+        TextInput:
+            id: password2
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.35, 'y': 0.3}
+            text: 'Repeat Password'
+            font_size: '13sp'
+            halign: 'center'
+            foreground_color: 0, 0, 0, 0.6
+            allow_copy: True
+            hint_text: 'here goes the hint'
+        Button:
+            id: sign_up
+            text: 'sign up'
+            on_press: root.create()
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.35, 'y': 0.2}
+            background_color: 0, 0.004, 0.98, 1
+        Label:
+            id: login_url
+            markup: True
+            text: 'already have an account '
+            pos_hint: {'x': -0.01, 'y': -0.35}
+            color: 0, 0, 0, 1
+        Button:
+            id: login
+            text: 'sign in'
+            color: 0, 0.039, 0.98, 1
+            background_color: 0, 0, 0, 0
+            pos_hint: {'x': 0.16, 'y': -0.35}
+            on_press: root.sign_in()
+
+
+<ThankWidget>:
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    FloatLayout:
+        canvas:
+            Color:
+                rgba: 0.98, 0.98, 0.98, 0.75
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: root.width*0.8, root.height*0.8
+        pos: root.x + root.width*0.1, root.y + root.width*0.1
+        Label:
+            id: app_name
+            markup: True
+            text: '[b]RosterAI[/b]'
+            color: 0, 0.039, 0.98, 1
+            font_size: '22sp'
+            pos_hint: {'x': -0.35, 'y': 0.4}
+        Label:
+            id: conglatulation
+            markup: True
+            text: '[color=#000afa]Congratulations[/color] \n You have Successfull created an Acount'
+            halign: 'center'
+            valign: 'middle'
+            color: 0, 0, 0, 1
+            font_size: '16sp'
+            pos_hint: {'x': 0, 'y': 0}
+        Button:
+            text: 'Back to Login page'
+            size_hint: 0.6, 0.05
+            pos_hint: {'x': 0.2, 'y': 0.1}
+
+
+<Loginwidget>:
+    canvas:
+        Rectangle:
+            source: './bckground.jpg'
+            pos: self.pos
+            size: self.size
+    FloatLayout:
+        size: root.width*0.8, root.height*0.8
+        pos: root.width*0.1, root.height*0.1
+        canvas:
+            Color:
+                rgba: 0.98, 0.98, 0.98, 0.75
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            id: app_name
+            markup: True
+            text: '[b]RosterAI[/b]'
+            color: 0, 0.039, 0.98, 1
+            font_size: '22sp'
+            pos_hint: {'x': -0.35, 'y': 0.4}
+        Label:
+            id: login_title
+            text: 'login to continue'
+            font_size: '21sp'
+            color: 0, 0.039, 0.98, 1
+            pos_hint: {'x': -0.025, 'y': 0.25}
+        TextInput:
+            id: username
+            text: 'username'
+            foreground_color: 0, 0, 0, 0.6
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.3, 'y': 0.6}
+        
+        TextInput:
+            id: password
+            text: 'password'
+            foreground_color: 0, 0, 0, 0.6
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.3, 'y': 0.5}
+        Button:
+            text: 'forgot password?'
+            color: 0.98, 0, 0, 1
+            size_hint: 0.2, 0.06
+            pos_hint: {'x': 0.45, 'y': 0.4}
+            background_color: 0, 0, 0, 0
+            halign: 'right'
+        Button:
+            text: 'login'
+            #color: 0.98, 0, 0, 1
+            size_hint: 0.35, 0.06
+            pos_hint: {'x': 0.3, 'y': 0.3}
+            background_color: 0, 0.039, 0.98, 1
+        Label:
+            id: login_url
+            markup: True
+            text: "don't have an acount? "
+            pos_hint: {'x': -0.01, 'y': -0.35}
+            color: 0, 0, 0, 1
+        Button:
+            id: signup_url
+            text: 'sign up'
+            color: 0, 0.039, 0.98, 1
+            background_color: 0, 0, 0, 0
+            pos_hint: {'x': 0.16, 'y': -0.35}
+            on_press: root.sign_up()
